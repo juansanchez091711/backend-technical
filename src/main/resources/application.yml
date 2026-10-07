@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bom-service
+  r2dbc:
+    url: r2dbc:h2:mem:///bomdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+
+quanta:
+  operators-api:
+    base-url: https://jsonplaceholder.typicode.com
+    connect-timeout: 2s
+    read-timeout: 5s
