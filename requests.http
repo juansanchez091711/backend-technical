@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:8080
+
+### Crear producto
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{"name": "Zapato"}
+
+### Agregar Cuero
+POST {{baseUrl}}/products/1/materials
+Content-Type: application/json
+
+{"material": "Cuero", "quantity": 2}
+
+### Agregar Suela
+POST {{baseUrl}}/products/1/materials
+Content-Type: application/json
+
+{"material": "Suela", "quantity": 1}
+
+### Agregar Cordones
+POST {{baseUrl}}/products/1/materials
+Content-Type: application/json
+
+{"material": "Cordones", "quantity": 1}
+
+### Calcular producción de 100 zapatos
+GET {{baseUrl}}/production/calculate?productId=1&quantity=100
+
+### Operarios (API externa)
+GET {{baseUrl}}/operators
+
+### Error 400: cantidad inválida
+GET {{baseUrl}}/production/calculate?productId=1&quantity=0
+
+### Error 404: producto inexistente
+POST {{baseUrl}}/products/999/materials
+Content-Type: application/json
+
+{"material": "Cuero", "quantity": 2}
