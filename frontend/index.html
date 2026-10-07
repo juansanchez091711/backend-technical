@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QUANTA MRP · BOM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>QUANTA MRP · Bill of Materials</h1>
+    <p>Demo del microservicio reactivo (Spring WebFlux + R2DBC)</p>
+</header>
+
+<main>
+    <section class="card">
+        <h2>1. Crear producto</h2>
+        <form id="product-form">
+            <input id="product-name" placeholder="Nombre (ej. Zapato)" required maxlength="150">
+            <button type="submit">Crear</button>
+        </form>
+        <ul id="product-list" class="list"></ul>
+    </section>
+
+    <section class="card">
+        <h2>2. Agregar material al BOM</h2>
+        <form id="material-form">
+            <select id="material-product" required>
+                <option value="">Selecciona un producto</option>
+            </select>
+            <input id="material-name" placeholder="Material (ej. Cuero)" required maxlength="150">
+            <input id="material-qty" type="number" min="1" placeholder="Cantidad" required>
+            <button type="submit">Agregar</button>
+        </form>
+        <ul id="material-list" class="list"></ul>
+    </section>
+
+    <section class="card">
+        <h2>3. Calcular producción</h2>
+        <form id="calc-form">
+            <select id="calc-product" required>
+                <option value="">Selecciona un producto</option>
+            </select>
+            <input id="calc-qty" type="number" min="1" placeholder="Unidades (ej. 100)" required>
+            <button type="submit">Calcular</button>
+        </form>
+        <table id="calc-table" hidden>
+            <thead><tr><th>Material</th><th>Requerido</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>4. Operarios (API externa)</h2>
+        <button id="load-operators">Consultar operarios</button>
+        <table id="operators-table" hidden>
+            <thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Teléfono</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Registro de peticiones</h2>
+        <pre id="log"></pre>
+    </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

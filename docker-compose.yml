@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: .
+    image: quanta-bom-service
+    container_name: quanta-bom-backend
+    environment:
+      QUANTA_OPERATORSAPI_BASEURL: https://jsonplaceholder.typicode.com
+      QUANTA_OPERATORSAPI_CONNECTTIMEOUT: 2s
+      QUANTA_OPERATORSAPI_READTIMEOUT: 5s
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/8080' || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    image: quanta-bom-frontend
+    container_name: quanta-bom-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
